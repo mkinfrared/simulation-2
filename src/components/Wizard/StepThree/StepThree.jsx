@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios/index";
-import {Link, Route, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 class StepThree extends Component {
@@ -22,13 +22,10 @@ class StepThree extends Component {
 	}
 
 	addHouse() {
-		let self = this;
 		console.log(this.props);
 		const {name, address, city, state, zipcode} = this.props.state;
 		axios.post('/api/house', {name, address, city, state, zipcode})
-			 .then((resp) => <Route>
-				 <Redirect to="/"/>
-			 </Route>)
+			 .then((resp) => console.log(resp))
 			 .catch((err) => console.log(err));
 	}
 
@@ -44,9 +41,9 @@ class StepThree extends Component {
 					Desired Monthly Rent
 					<input onChange={(ev) => this.handleChange(ev)} type="text" name="rent"/>
 				</label>
-				{/*<Link to="/">*/}
-				<button onClick={this.addHouse}>Add House</button>
-				{/*</Link>*/}
+				<Link to="/">
+					<button onClick={this.addHouse}>Add House</button>
+				</Link>
 			</div>
 		);
 	}
